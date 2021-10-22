@@ -23,7 +23,7 @@ exports.create = (req,res) => {
     Employee.create(employee).then(data => {
         res.send(data);
     }).catch(error => {
-        res.send(505).send({ message: "Some error occur in creating new employee" });
+        res.status(500).send({ message: "Some error occur in creating new employee" });
     })
 };
 
