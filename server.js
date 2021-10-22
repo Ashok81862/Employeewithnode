@@ -10,19 +10,22 @@ const db = require("./app/models");
 //     console.log("Drop and re-sync db");
 // });
 
+var corsOption = {
+    origin : 'https://localhost:8081',
+};
+
 
 app.use(cors());
 app.use(bodyParser.json());
-
-
-//Simple Route
-app.get('/', (res,req) => {
-    res.json({ error: "Welcome to Node.js" });
-})
+app.use(bodyParser.urlencoded({ extended: true }));
 
 require("./app/routes/department.route.js")(app);
 require("./app/routes/employee.route.js")(app);
 
+//Simple Route
+app.get('/', (req,res) => {
+    res.json({ message: 'Welcome to Node.js' });
+});
 
 //Set Port and listen for request
 const PORT = process.env.PORT || 8080;
