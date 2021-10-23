@@ -23,8 +23,8 @@ db.departments = require("./department.model.js")(sequelize, Sequelize);
 
 db.employees = require("./employee.model.js")(sequelize,Sequelize);
 
-db.departments.hasMany(db.employees, { as: "employees"});
+db.departments.hasMany(db.employees, { as: "employees",onDelete: "cascade", hooks:true});
 
-db.employees.belongsTo(db.departments, { foreignKey:"departmentId", as: "department"});
+db.employees.belongsTo(db.departments, { foreignKey:"departmentId", as: "department",onDelete:"cascade", hooks:true});
 
 module.exports = db;
