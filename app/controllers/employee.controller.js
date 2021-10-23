@@ -32,7 +32,7 @@ exports.findAll = (req,res) => {
     const name = req.query.name;
     var condition = name ? { name: {[Op.like]: `%${name}` }}:null;
 
-    Employee.findAll({where: condition})
+    Employee.findAll({where: condition, include: ["department"]})
     .then(data => {
         res.send(data);
     })
@@ -45,7 +45,7 @@ exports.findAll = (req,res) => {
 exports.findOne = (req,res) => {
     const id = req.params.id;
 
-    Employee.findByPk(id).then(data => {
+    Employee.findByPk(id,{include: ["department"]}).then(data => {
         if(data){
             res.send(data)
         }else{
